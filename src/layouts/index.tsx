@@ -6,16 +6,25 @@ import {
   setWeb3Provider,
 } from "@/reduxs/accounts/account.slices";
 import { useAppDispatch, useAppSelector } from "@/reduxs/hooks";
-import { Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Icon,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { ethers } from "ethers";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 
+import { HamburgerIcon } from "@chakra-ui/icons";
+
 interface IProps {
   children: ReactNode;
 }
-
 export default function MainLayout({ children }: IProps) {
   const router = useRouter();
   console.log(router.pathname);
@@ -60,22 +69,31 @@ export default function MainLayout({ children }: IProps) {
             Blockchain
           </Heading>
           <Spacer />
-          {menus.map((menu) => (
-            <Link href={menu.url} key={menu.url}>
-              <a>
-                <Text
-                  mx="20px"
-                  fontSize="20px"
-                  textDecoration="none"
-                  fontFamily="VT323"
-                >
-                  {menu.name}
-                </Text>
-              </a>
-            </Link>
-          ))}
-
-          {!wallet && <ConnectWallet onClick={onConnectMetamask} />}
+          <Box display={{ sm: "none", lg: "flex" }}>
+            {menus.map((menu) => (
+              <Link href={menu.url} key={menu.url}>
+                <a>
+                  <Text
+                    mx="20px"
+                    fontSize="20px"
+                    textDecoration="none"
+                    fontFamily="VT323"
+                  >
+                    {menu.name}
+                  </Text>
+                </a>
+              </Link>
+            ))}
+          </Box>
+          <HStack display={{ sm: "block", lg: "none" }}>
+            {/* Use the `color` prop to change the icon color */}
+            <Icon as={HamburgerIcon} w={8} h={8} color="red.500" />
+          </HStack>
+          {!wallet && (
+            <Box display={{ sm: "none", lg: "flex" }}>
+              <ConnectWallet onClick={onConnectMetamask} />
+            </Box>
+          )}
           {wallet && (
             <WalletInfo address={wallet?.address} amount={wallet?.bnb || 0} />
           )}
