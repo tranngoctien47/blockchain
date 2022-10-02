@@ -1,18 +1,8 @@
 declare var window: any;
 import React from "react";
-import {
-  Button,
-  Flex,
-  Heading,
-  SimpleGrid,
-  Spacer,
-  Text,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { ConnectWallet, SuccessModal, WalletInfo } from "../../components";
-import { IPackage, IRate, IWalletInfo, TOKEN } from "../../_types_";
-import { ethers } from "ethers";
+import { Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { SuccessModal } from "../../components";
+import { IPackage, IRate, TOKEN } from "../../_types_";
 import { packages } from "../../constants";
 import InvestCard from "./components/InvestCard";
 import CrowSaleContract from "../../contracts/CrowdSaleContract";
@@ -37,23 +27,23 @@ export default function Package() {
     getRate();
   }, [getRate]);
 
-  const onConnectMetamask = async () => {
-    if (window.ethereum) {
-      const provider = new ethers.providers.Web3Provider(
-        window.ethereum,
-        undefined
-      );
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      const bigBalance = await signer.getBalance();
-      const bnbBalance = Number.parseFloat(
-        ethers.utils.formatEther(bigBalance)
-      );
-      setWallet({ address, bnb: bnbBalance });
-      setWeb3Provider(provider);
-    }
-  };
+  // const onConnectMetamask = async () => {
+  //   if (window.ethereum) {
+  //     const provider = new ethers.providers.Web3Provider(
+  //       window.ethereum,
+  //       undefined
+  //     );
+  //     await provider.send("eth_requestAccounts", []);
+  //     const signer = provider.getSigner();
+  //     const address = await signer.getAddress();
+  //     const bigBalance = await signer.getBalance();
+  //     const bnbBalance = Number.parseFloat(
+  //       ethers.utils.formatEther(bigBalance)
+  //     );
+  //     setWallet({ address, bnb: bnbBalance });
+  //     setWeb3Provider(provider);
+  //   }
+  // };
 
   const handleBuyIco = async (pk: IPackage) => {
     if (!web3Provider) return;
