@@ -61,7 +61,7 @@ export default function HomeMain() {
             </Button>
           </CopyToClipboard>
 
-          <CopyToClipboard text={"0xDd4aeA75Eb8A6136BDeD72A3A5409e65B847741E"}>
+          <CopyToClipboard text={"0x61734A8dc649a7485aF7016cbEBD6DDBd03256e5"}>
             <Button
               variant="primary"
               my="5px"
@@ -76,7 +76,7 @@ export default function HomeMain() {
                 <span>
                   {" "}
                   {showSortAddress(
-                    "0xDd4aeA75Eb8A6136BDeD72A3A5409e65B847741E"
+                    "0x61734A8dc649a7485aF7016cbEBD6DDBd03256e5"
                   )}{" "}
                   ICO
                 </span>

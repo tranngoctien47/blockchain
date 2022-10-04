@@ -50,6 +50,7 @@ export default function Package() {
     setPak(pk);
     setIsProcessing(true);
     let hash = "";
+
     const crowdContract = new CrowSaleContract(web3Provider);
     if (pk.token === TOKEN.USDT) {
       const usdtContract = new UsdtContract(web3Provider);
@@ -96,7 +97,7 @@ export default function Package() {
             pak={pk}
             key={String(index)}
             isBuying={isProcessing && pak?.key === pk.key}
-            rate={pk.token === TOKEN.BNB ? rate.bnbRate : rate.usdtRate}
+            rate={pk.token === TOKEN.BNB ? rate.usdtRate : rate.bnbRate}
             walletInfo={wallet}
             onBuy={() => handleBuyIco(pk)}
           />
