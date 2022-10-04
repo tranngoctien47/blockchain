@@ -12,6 +12,11 @@ import {
   Heading,
   HStack,
   Icon,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Spacer,
   Text,
 } from "@chakra-ui/react";
@@ -20,7 +25,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { AddIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 interface IProps {
   children: ReactNode;
@@ -85,10 +90,26 @@ export default function MainLayout({ children }: IProps) {
               </Link>
             ))}
           </Box>
-          <HStack display={{ sm: "block", lg: "none" }}>
-            {/* Use the `color` prop to change the icon color */}
-            <Icon as={HamburgerIcon} w={8} h={8} color="red.500" />
-          </HStack>
+          <Box display={{ sm: "block", lg: "none" }}>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<HamburgerIcon />}
+                variant="outline"
+              />
+              <MenuList>
+                {menus.map((menu) => (
+                  <Link href={menu.url} key={menu.url}>
+                    <MenuItem command="⌘T" fontFamily="VT323">
+                      {menu.name}
+                    </MenuItem>
+                  </Link>
+                ))}
+              </MenuList>
+            </Menu>
+          </Box>
+
           {!wallet && (
             <Box display={{ sm: "none", lg: "flex" }}>
               <ConnectWallet onClick={onConnectMetamask} />
